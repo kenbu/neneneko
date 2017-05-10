@@ -2,9 +2,9 @@
 Automatic UI test framework
 
 
-
 todo:
 ○ランダムタップ
+
 ○ターゲットヒエラルキー
 ○除外ヒエラルキー
 ○インターバル

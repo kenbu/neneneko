@@ -19,9 +19,8 @@ namespace kenbu.Neneneko{
 
         void HandleException(string logString, string stackTrace, LogType type)
         {
-            if (OnError == null) {
-            
-                }
+
+            //todo: IncluleとExcule
 
             if (type == LogType.Exception)
             {

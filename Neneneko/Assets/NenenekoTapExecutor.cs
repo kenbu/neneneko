@@ -11,10 +11,18 @@ namespace kenbu.Neneneko{
     public class NenenekoTapExecutor : MonoBehaviour {
 
         [SerializeField]
+        private RectTransform _tapPoint;
+
+        [SerializeField]
         private int _timeoutFrame = 1000;
 
         [SerializeField]
         private int _grid = 10;
+
+        [SerializeField]
+        private float _interval = 0.04f;
+
+        private List<string> _history = new List<string>();
 
         private Coroutine _loop;
     	// Use this for initialization
@@ -28,14 +36,20 @@ namespace kenbu.Neneneko{
                 var w = UnityEngine.Random.Range (0, Screen.width / _grid) * _grid;
                 var h = UnityEngine.Random.Range (0, Screen.height / _grid) * _grid;
                 var button = GetButton (w, h);
-                yield return null;
+                _tapPoint.anchoredPosition = new Vector2 (w - Screen.width/2, h - Screen.height/2);
+
             
                 if (button != null) {
+                    _history.Add (button.name);
+                    //古いものから消す。
+
                     button.onClick.Invoke ();
                     tryCnt = 0;
                 } else {
                     tryCnt++;
                 }
+                yield return new WaitForSeconds (_interval);
+
             }
 
             throw new Exception ("NenekoTapExecutor TimeOut");

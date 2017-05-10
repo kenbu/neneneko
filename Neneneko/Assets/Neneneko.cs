@@ -6,13 +6,13 @@ namespace kenbu.Neneneko{
     public class Neneneko : MonoBehaviour {
 
         private NenenekoErrorCatcher _errorCatcher;
-        private NenenekoRecorder _screenRecorder;
+        private NenenekoRecorder _recorder;
         private NenenekoTapExecutor _tapExecutor;   //todo: 一旦タップのみそのうちユーザーインタラクションをいろいろ設定可能に。
 
 
         // Use this for initialization
         void Awake () {
-            _screenRecorder = GetComponent<NenenekoRecorder> ();
+            _recorder = GetComponent<NenenekoRecorder> ();
             _errorCatcher = GetComponent<NenenekoErrorCatcher> ();
             _tapExecutor = GetComponent<NenenekoTapExecutor> ();
 
@@ -20,17 +20,12 @@ namespace kenbu.Neneneko{
             _tapExecutor.Play ();
 
             //レコーディング開始
-            _screenRecorder.StartRecording ();
+            _recorder.StartRecording ();
             _errorCatcher.OnError = (logString, stackTrace, type)=>{
                 _tapExecutor.Stop ();
 
-                _screenRecorder.CompleateRecording();
+                _recorder.CompleateRecording();
             };
-        }
-
-        // Update is called once per frame
-        void Update () {
-            //throw new Exception ("aaaaaa");
         }
     }
 }

@@ -3,7 +3,8 @@
   <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/a13098/neneneko/Neneneko/Assets/NenenekoErrorCatcher.cs" line="27" column="14" />
+      <Breakpoint file="/Users/a13098/neneneko/Neneneko/Assets/NenenekoErrorCatcher.cs" line="26" column="14" />
+      <Breakpoint file="/Users/a13098/neneneko/Neneneko/Assets/Neneneko.cs" line="18" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

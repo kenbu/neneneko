@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class Dev : MonoBehaviour {
 
@@ -16,14 +17,12 @@ public class Dev : MonoBehaviour {
         _button1.onClick.AddListener (()=>{
             Debug.Log("tapされました。1");
         });
-        /*
         _button2.onClick.AddListener (()=>{
             Debug.Log("tapされました。2");
         });
         _button3.onClick.AddListener (()=>{
-            Debug.Log("tapされました。3");
+            throw new Exception("エラーボタン押したよ。");
         });
-        */
 	}
 	
 	// Update is called once per frame

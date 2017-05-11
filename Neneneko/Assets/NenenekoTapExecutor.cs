@@ -25,36 +25,47 @@ namespace kenbu.Neneneko{
         private List<string> _history = new List<string>();
 
         private Coroutine _loop;
+
+        private bool tapEnable;
+        private int tryCnt;
+
     	// Use this for initialization
     	public void Play () {
-            _loop = StartCoroutine (Loop());
+            tryCnt = 0;
+            tapEnable = true;
     	}
 
-        private IEnumerator Loop(){
-            int tryCnt = 0;
-            while(tryCnt < _timeoutFrame){
-                var w = UnityEngine.Random.Range (0, Screen.width / _grid) * _grid;
-                var h = UnityEngine.Random.Range (0, Screen.height / _grid) * _grid;
-                var button = GetButton (w, h);
-                _tapPoint.anchoredPosition = new Vector2 (w - Screen.width/2, h - Screen.height/2);
-
+        private void OnGUI(){
+            if (tapEnable) {
             
-                if (button != null) {
-                    _history.Add (button.name);
-                    //古いものから消す。
+                if (tryCnt < _timeoutFrame) {
+                    var w = UnityEngine.Random.Range (0, Screen.width / _grid) * _grid;
+                    var h = UnityEngine.Random.Range (0, Screen.height / _grid) * _grid;
+                    var button = GetButton (w, h);
+                    _tapPoint.anchoredPosition = new Vector2 (w - Screen.width / 2, h - Screen.height / 2);
 
-                    button.onClick.Invoke ();
-                    tryCnt = 0;
+
+                    if (button != null) {
+                        _history.Add (button.name);
+                        //古いものから消す。
+
+                        button.onClick.Invoke ();
+                        tryCnt = 0;
+                    } else {
+                        tryCnt++;
+                    }
+
                 } else {
-                    tryCnt++;
+                    tapEnable = false;
+                    throw new Exception ("NenekoTapExecutor TimeOut");
+
                 }
-                yield return new WaitForSeconds (_interval);
 
             }
 
-            throw new Exception ("NenekoTapExecutor TimeOut");
         }
-    	
+
+
         private Button GetButton(int x, int y)
         {
             var ev = new PointerEventData(EventSystem.current);
@@ -84,6 +95,8 @@ namespace kenbu.Neneneko{
 
     	// Update is called once per frame
         public void Stop () {
+            tapEnable = false;
+             
             if (_loop != null) {
                 StopCoroutine (_loop);
                 _loop = null;

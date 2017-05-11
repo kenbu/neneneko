@@ -21,6 +21,7 @@ namespace kenbu.Neneneko{
             //レコーディング開始
             _recorder.StartRecording ();
             _errorCatcher.OnError = (logString, stackTrace, type)=>{
+                Debug.Log("エラー拾った:" + logString);
                 _tapExecutor.Stop ();
                 _recorder.CompleateRecording();
             };

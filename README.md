@@ -3,12 +3,12 @@ Automatic UI test framework
 
 
 todo:
-- ランダムタップ
- - 対象・除外ヒエラルキー
+タップ
  - インターバル
  - どうフレーム内の連続タップ
-- Error
- -　対象・除外エラー
+録画
+ - インターバル
+Error
 
 -editor
  - editor開始/止める
@@ -18,11 +18,18 @@ todo:
  - スワイプ
  - マルチタップ
 
-- 録画
- - インターバル
  
-- FFMPGEG
+- FF-MPEG
 
 - CLI
 
 done: 
+タップ
+ - 対象・除外ヒエラルキー
+録画
+ - 画像書き出し
+Error
+ -　対象・除外エラー
+
+-editor
+ - editor開始/止める

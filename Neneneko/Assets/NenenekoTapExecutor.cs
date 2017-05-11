@@ -66,7 +66,12 @@ namespace kenbu.Neneneko{
                 int l = results.Count;
                 for (int i = 0; i < l; i++) {
                     var result = results [i];
+                    //NenenekoTestExcluedingがアタッチされている場合はタップ対象としない。
+                    if (result.gameObject.GetComponent <NenenekoTestExclueding> () != null) {
+                        continue;
+                    }
                     var button = result.gameObject.GetComponent<Button> ();
+
                     if (button != null && button.onClick != null && button.isActiveAndEnabled) {
                         return button;
                     }

@@ -9,7 +9,6 @@ namespace kenbu.Neneneko{
         private NenenekoRecorder _recorder;
         private NenenekoTapExecutor _tapExecutor;   //todo: 一旦タップのみそのうちユーザーインタラクションをいろいろ設定可能に。
 
-
         // Use this for initialization
         void Awake () {
             _recorder = GetComponent<NenenekoRecorder> ();
@@ -23,7 +22,6 @@ namespace kenbu.Neneneko{
             _recorder.StartRecording ();
             _errorCatcher.OnError = (logString, stackTrace, type)=>{
                 _tapExecutor.Stop ();
-
                 _recorder.CompleateRecording();
             };
         }

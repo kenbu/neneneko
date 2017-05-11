@@ -36,7 +36,9 @@ Assets/_AssetBundle.meta
 
 # MonoDevelop
 *.usertasks
-
+*/Assets/kenbu*
 
 # Visual Studio Code
 
+captured.meta
+Neneneko.userprefs

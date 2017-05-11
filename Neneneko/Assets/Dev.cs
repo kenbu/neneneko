@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using kenbu.Neneneko;
 
 public class Dev : MonoBehaviour {
 
@@ -19,6 +20,7 @@ public class Dev : MonoBehaviour {
         });
         _button2.onClick.AddListener (()=>{
             Debug.Log("tapされました。2");
+
         });
         _button3.onClick.AddListener (()=>{
             throw new Exception("エラーボタン押したよ。");

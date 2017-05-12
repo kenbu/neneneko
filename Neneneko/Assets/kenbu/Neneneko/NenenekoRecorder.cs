@@ -19,7 +19,7 @@ namespace kenbu.Neneneko{
         private float _interval = 0.05f;
 
         [SerializeField]
-        private string _path = "/kenbu/Neneneko/captured/";
+        private string _path = "/kenbu/Neneneko/Captured/";
 
         public void StartRecording(){
             _coroutine = StartCoroutine (Record());

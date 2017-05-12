@@ -18,12 +18,19 @@ namespace kenbu.Neneneko{
 
         // Use this for initialization
         void Awake () {
-            //todo: スタート関数を作るランといかん。
-            _isTesting = true;
-
             _recorder = GetComponent<NenenekoRecorder> ();
             _errorCatcher = GetComponent<NenenekoErrorCatcher> ();
             _tapExecutor = GetComponent<NenenekoTapExecutor> ();
+        }
+
+        public void Play(){
+
+            if (_isTesting) {
+                return;
+            } 
+
+            _isTesting = true;
+
 
             //タップスタート
             _tapExecutor.Play ();
@@ -32,10 +39,16 @@ namespace kenbu.Neneneko{
             _recorder.StartRecording ();
             _errorCatcher.OnError = (logString, stackTrace, type)=>{
                 Debug.Log("エラー拾った:" + logString);
-                _tapExecutor.Stop ();
-                _recorder.CompleateRecording();
-                _isTesting = false;
+                Stop();
             };
+
         }
+
+        public void Stop(){
+            _tapExecutor.Stop ();
+            _recorder.CompleateRecording();
+            _isTesting = false;
+        }
+
     }
 }

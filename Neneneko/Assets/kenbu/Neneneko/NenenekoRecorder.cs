@@ -59,7 +59,8 @@ namespace kenbu.Neneneko{
                 Texture2D tex = _capture [i];
                 byte[] bytes = tex.EncodeToPNG();
                 Object.Destroy(tex);
-                string path = Application.dataPath + _path + i + ".png";
+                //string path = Application.dataPath + _path + i + ".png";
+                string path = Application.dataPath + "/" + i + ".png";
                 //Debug.Log (path);
                 //Write to a file in the project folder
                 File.WriteAllBytes(path, bytes);

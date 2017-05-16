@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+
+
 namespace kenbu.Neneneko{
 
     public class NenenekoErrorCatcher : MonoBehaviour {
@@ -16,7 +19,7 @@ namespace kenbu.Neneneko{
 
         void OnDisable()
         {
-            Application.logMessageReceived -= HandleException;
+            
         }
 
         void HandleException(string logString, string stackTrace, LogType type)

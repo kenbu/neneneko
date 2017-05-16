@@ -9,6 +9,9 @@ namespace kenbu.Neneneko{
         private NenenekoRecorder _recorder;
         private NenenekoTapExecutor _tapExecutor;   //todo: 一旦タップのみそのうちユーザーインタラクションをいろいろ設定可能に。
 
+        public System.Action<string> OnComplete;
+
+
         private static bool _isTesting;
         public static bool IsTesting {
             get{
@@ -21,6 +24,9 @@ namespace kenbu.Neneneko{
             _recorder = GetComponent<NenenekoRecorder> ();
             _errorCatcher = GetComponent<NenenekoErrorCatcher> ();
             _tapExecutor = GetComponent<NenenekoTapExecutor> ();
+
+            //
+            Play();
         }
 
         public void Play(){
@@ -46,8 +52,13 @@ namespace kenbu.Neneneko{
 
         public void Stop(){
             _tapExecutor.Stop ();
-            _recorder.CompleateRecording();
-            _isTesting = false;
+            _recorder.CompleateRecording(()=>{
+                if(OnComplete != null) {
+                    OnComplete.Invoke ("aaaaa");
+                }
+                _isTesting = false;
+            });
+
         }
 
     }

@@ -40,16 +40,16 @@ namespace kenbu.Neneneko{
             
 
         // Use this for initialization
-        public void CompleateRecording () {
+        public void CompleateRecording (System.Action callback) {
             if (_coroutine != null) {
                 StopCoroutine (_coroutine);
                 _coroutine = null;
             }
 
-            StartCoroutine (_CompleateRecording());
+            StartCoroutine (_CompleateRecording(callback));
     	}
 
-        private IEnumerator _CompleateRecording(){
+        private IEnumerator _CompleateRecording(System.Action callback){
             yield return new WaitForEndOfFrame ();
             Capture ();
             //ファイル生成
@@ -60,13 +60,14 @@ namespace kenbu.Neneneko{
                 byte[] bytes = tex.EncodeToPNG();
                 Object.Destroy(tex);
                 string path = Application.dataPath + _path + i + ".png";
-                Debug.Log (path);
+                //Debug.Log (path);
                 //Write to a file in the project folder
                 File.WriteAllBytes(path, bytes);
 
             }
             _capture = new List<Texture2D>(); 
 
+            callback.Invoke ();
         }
 
         private void Capture(){

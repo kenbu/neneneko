@@ -16,7 +16,8 @@ public class NenenekoEditor : Editor
 
 
     public static void StartTest(){
-        Debug.Log("aaa");
+        EditorApplication.LoadLevelInPlayMode ("Main");
+        EditorApplication.isPlaying = true;
     }
 
     public override void OnInspectorGUI()
@@ -25,6 +26,11 @@ public class NenenekoEditor : Editor
 
         Neneneko neneneko = target as Neneneko;
 
+
+        if( GUILayout.Button( "PlayEditor" ) )
+        {
+            StartTest ();
+        }
 
         if( GUILayout.Button( "Play" ) )
         {

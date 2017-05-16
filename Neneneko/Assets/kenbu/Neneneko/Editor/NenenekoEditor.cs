@@ -3,6 +3,8 @@ using UnityEngine;
 using kenbu.Neneneko;
 using UnityEngine.EventSystems;
 using System.Security.Cryptography;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 [CustomEditor(typeof(Neneneko))]               
 public class NenenekoEditor : Editor          
@@ -10,9 +12,7 @@ public class NenenekoEditor : Editor
 
 
     public static void StartTest(){
-        EditorApplication.LoadLevelInPlayMode ("Main");
-
-
+        EditorSceneManager.OpenScene ("Assets/Main.unity");
 
         EditorApplication.isPlaying = true;
     }

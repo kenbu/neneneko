@@ -3,6 +3,11 @@ using UnityEngine;
 using kenbu.Neneneko;
 using UnityEngine.EventSystems;
 
+public class NenenekoBatchMode{
+    public static void BatchTest(){
+        Debug.Log("aaa");
+    }
+}
 
 [CustomEditor(typeof(Neneneko))]               
 public class NenenekoEditor : Editor          

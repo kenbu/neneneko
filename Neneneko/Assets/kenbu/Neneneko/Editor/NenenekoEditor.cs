@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class NenenekoBatchMode{
     public static void BatchTest(){
-        Debug.Log("aaa");
+
     }
 }
 

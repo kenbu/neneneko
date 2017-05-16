@@ -4,8 +4,9 @@ using kenbu.Neneneko;
 using UnityEngine.EventSystems;
 
 public class NenenekoBatchMode{
-    public static void BatchTest(){
-
+    public static string BatchTest(){
+        Debug.Log("aaa");
+        return "From Unity!!!!";
     }
 }
 

@@ -1,10 +1,17 @@
 ﻿using UnityEditor;                              
 using UnityEngine;
 using kenbu.Neneneko;
+using UnityEngine.EventSystems;
+
+
 [CustomEditor(typeof(Neneneko))]               
 public class NenenekoEditor : Editor          
 {
 
+
+    public static StartTest(){
+        Debug.Log("aaa");
+    }
 
     public override void OnInspectorGUI()
     {

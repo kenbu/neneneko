@@ -9,7 +9,7 @@ public class NenenekoEditor : Editor
 {
 
 
-    public static StartTest(){
+    public static void StartTest(){
         Debug.Log("aaa");
     }
 

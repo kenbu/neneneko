@@ -13,14 +13,6 @@ namespace kenbu.Neneneko{
         [SerializeField]
         private RectTransform _tapPoint;
 
-        [SerializeField]
-        private int _timeoutFrame = 1000;
-
-        [SerializeField]
-        private int _grid = 10;
-
-        [SerializeField]
-        private float _interval = 0.04f;
 
         private List<string> _history = new List<string>();
 
@@ -35,12 +27,13 @@ namespace kenbu.Neneneko{
             tapEnable = true;
     	}
 
+        //UPDATE
         private void OnGUI(){
             if (tapEnable) {
             
-                if (tryCnt < _timeoutFrame) {
-                    var w = UnityEngine.Random.Range (0, Screen.width / _grid) * _grid;
-                    var h = UnityEngine.Random.Range (0, Screen.height / _grid) * _grid;
+                if (tryCnt < Neneneko.tapTimeoutErrorFrame) {
+                    var w = UnityEngine.Random.Range (0, Screen.width / Neneneko.tapGrid) * Neneneko.tapGrid;
+                    var h = UnityEngine.Random.Range (0, Screen.height / Neneneko.tapGrid) * Neneneko.tapGrid;
                     var button = GetButton (w, h);
                     _tapPoint.anchoredPosition = new Vector2 (w - Screen.width / 2, h - Screen.height / 2);
 

@@ -12,14 +12,8 @@ namespace kenbu.Neneneko{
         private Coroutine _coroutine;
         private List<Texture2D> _capture = new List<Texture2D>();
 
-        [SerializeField]
-        private int _captureMaxNum = 10;
 
-        [SerializeField]
-        private float _interval = 0.05f;
 
-        [SerializeField]
-        private string _path = "/kenbu/Neneneko/Captured/";
 
         public void StartRecording(){
             _coroutine = StartCoroutine (Record());
@@ -32,7 +26,7 @@ namespace kenbu.Neneneko{
                 //キャプチャ生成
                 Capture();
 
-                yield return new WaitForSeconds (_interval);
+                yield return new WaitForSeconds (Neneneko.captureInterval);
 
             }
         }
@@ -59,10 +53,7 @@ namespace kenbu.Neneneko{
                 Texture2D tex = _capture [i];
                 byte[] bytes = tex.EncodeToPNG();
                 Object.Destroy(tex);
-                //string path = Application.dataPath + _path + i + ".png";
-                string path = Application.dataPath + "/" + i + ".png";
-                //Debug.Log (path);
-                //Write to a file in the project folder
+                string path = Application.dataPath + Neneneko.outputPath + i + ".png";
                 File.WriteAllBytes(path, bytes);
 
             }
@@ -73,7 +64,7 @@ namespace kenbu.Neneneko{
 
         private void Capture(){
             //古いものから消していく
-            if (_capture.Count > _captureMaxNum) {
+            if (_capture.Count > Neneneko.captureMaxNum) {
                 Object.Destroy(_capture [0]);
                 _capture.RemoveAt (0);
             }

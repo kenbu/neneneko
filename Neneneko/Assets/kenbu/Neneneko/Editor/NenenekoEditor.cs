@@ -18,9 +18,9 @@ public class NenenekoEditor : Editor
 
         EditorSceneManager.OpenScene (defaultScene);
 
+        Neneneko.isExcutedCI = true;
 
         EditorApplication.isPlaying = true;
-        Neneneko.isExcutedCI = true;
 
     }
 

@@ -5,22 +5,25 @@ using UnityEngine.EventSystems;
 using System.Security.Cryptography;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using NUnit.Framework.Constraints;
 
 [CustomEditor(typeof(Neneneko))]               
 public class NenenekoEditor : Editor          
 {
-
     /// <summary>
     /// CIから叩かれる。
     /// </summary>
     public static void StartTest(){
-
         string defaultScene = "Assets/Main.unity";
 
         EditorSceneManager.OpenScene (defaultScene);
-        Neneneko.isExcutedCI = true;
+
+
         EditorApplication.isPlaying = true;
+        Neneneko.isExcutedCI = true;
+
     }
+
 
 
 
@@ -53,6 +56,7 @@ public class NenenekoEditor : Editor
             Neneneko.testTimeSconds = EditorGUILayout.FloatField ("テスト時間", Neneneko.testTimeSconds);
 
         }
+
         if (Neneneko.IsTesting) {
             GUILayout.Label ("残り時間:" + neneneko.RemainingTestTime);
         }

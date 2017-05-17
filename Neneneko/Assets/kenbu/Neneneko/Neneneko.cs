@@ -9,13 +9,11 @@ using System.Timers;
 using UnityEditor;
 #endif
 namespace kenbu.Neneneko{
+    [ExecuteInEditMode]
     public class Neneneko : MonoBehaviour {
 
         //CIが実行したか
         public static bool isExcutedCI = false;
-
-        //todo: CIで設定されてたら優先
-
 
         //アウトプットパス
         public static string outputPath = "/kenbu/Neneneko/Captured/";

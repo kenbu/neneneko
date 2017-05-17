@@ -61,7 +61,7 @@ namespace kenbu.Neneneko{
         }
 
         // Use this for initialization
-        void Awake () {
+        void Start () {
             //todo: EditorじゃなかったらDestroy
 
 

@@ -33,7 +33,7 @@ namespace kenbu.Neneneko{
         public static int tapInterval = 0;
 
         //テストタイム 5分
-        public static float testTimeSconds = 5.0f * 60.0f;
+        public static float testTimeSconds = 1.0f * 60.0f;
 
         public static bool isTesting = false;
 
@@ -41,6 +41,7 @@ namespace kenbu.Neneneko{
         public bool success = true;
 
         private NenenekoErrorCatcher _errorCatcher;
+        private NenenekoTimer _timer;
         private NenenekoRecorder _recorder;
         private NenenekoTapExecutor _tapExecutor;   //todo: 一旦タップのみそのうちユーザーインタラクションをいろいろ設定可能に。
 
@@ -58,7 +59,7 @@ namespace kenbu.Neneneko{
             _recorder = GetComponent<NenenekoRecorder> ();
             _errorCatcher = GetComponent<NenenekoErrorCatcher> ();
             _tapExecutor = GetComponent<NenenekoTapExecutor> ();
-
+            _timer = GetComponent<NenenekoTimer> ();
 
             Play();
         }
@@ -88,6 +89,7 @@ namespace kenbu.Neneneko{
                 success = false;
             };
             yield return new WaitUntil (()=>{
+                _timer.SetRemainingTime (RemainingTestTime);
                 return success == false || RemainingTestTime <= 0;
             });
             Stop();

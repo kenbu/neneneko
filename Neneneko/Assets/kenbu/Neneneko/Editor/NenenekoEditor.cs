@@ -1,79 +1,62 @@
 ﻿using UnityEditor;                              
 using UnityEngine;
 using kenbu.Neneneko;
-using UnityEngine.EventSystems;
-using System.Security.Cryptography;
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
-using NUnit.Framework.Constraints;
 
-[CustomEditor(typeof(Neneneko))]               
+[CustomEditor(typeof(NenenekoPlayer))]               
 public class NenenekoEditor : Editor          
 {
-    /// <summary>
-    /// CIから叩かれる。
-    /// </summary>
-    public static void StartTest(){
-        string defaultScene = "Assets/Main.unity";
 
-        EditorSceneManager.OpenScene (defaultScene);
-
-        Neneneko.isExcutedCI = true;
-
-        EditorApplication.isPlaying = true;
-
-    }
-
-
-
-
-
+    private GameObject resource;
 
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        Neneneko neneneko = target as Neneneko;
+        if (!EditorApplication.isPlaying) {
+            //再生してない。
+            if( GUILayout.Button( "PlayCI" ) )
+            {
+                NenenekoCI.StartTest ();
+            }
+            return;
+        } 
 
-        if (!Neneneko.isExcutedCI) {
-            Neneneko.outputPath = "/kenbu/Neneneko/Captured/";
+        Neneneko.outputPath = "/kenbu/Neneneko/Captured/";
 
-            //キャプチャ数
-            Neneneko.captureMaxNum = EditorGUILayout.IntField ("最大キャプチャ枚数", Neneneko.captureMaxNum);
+        //キャプチャ数
+        Neneneko.captureMaxNum = EditorGUILayout.IntField ("最大キャプチャ枚数", Neneneko.captureMaxNum);
 
-            //キャプチャインターバル
-            Neneneko.captureInterval = EditorGUILayout.IntField ("キャプチャインターバルフレーム", Neneneko.captureInterval);
+        //キャプチャインターバル
+        Neneneko.captureInterval = EditorGUILayout.IntField ("キャプチャインターバルフレーム", Neneneko.captureInterval);
 
-            //タップタイムアウト
-            Neneneko.tapTimeoutErrorFrame = EditorGUILayout.IntField ("タップ タイムアウトフレーム", Neneneko.tapTimeoutErrorFrame);
+        //タップタイムアウト
+        Neneneko.tapTimeoutErrorFrame = EditorGUILayout.IntField ("タップ タイムアウトフレーム", Neneneko.tapTimeoutErrorFrame);
 
-            //タップグリッド
-            Neneneko.tapGrid = EditorGUILayout.IntField ("タップグリッド", Neneneko.tapGrid);
+        //タップグリッド
+        Neneneko.tapGrid = EditorGUILayout.IntField ("タップグリッド", Neneneko.tapGrid);
 
-            //todo: タップインターバル 
-            Neneneko.tapInterval = EditorGUILayout.IntField ("タップインターバル", Neneneko.tapInterval);
+        //todo: タップインターバル 
+        Neneneko.tapInterval = EditorGUILayout.IntField ("タップインターバル", Neneneko.tapInterval);
 
-            Neneneko.testTimeSconds = EditorGUILayout.FloatField ("テスト時間", Neneneko.testTimeSconds);
+        Neneneko.testTimeSconds = EditorGUILayout.FloatField ("テスト時間", Neneneko.testTimeSconds);
 
+        Neneneko.isExcutedCI = false;
+
+        if (Neneneko.isTesting == false) {
+            if( GUILayout.Button( "Play" ) )
+            {
+                if (resource == null) {
+                    resource = Instantiate (Resources.Load ("Neneneko")as GameObject)as GameObject;
+                }
+            }
+        } else {
+            if( GUILayout.Button( "Stop" ) )
+            {
+                Neneneko neneneko = resource.GetComponent <Neneneko>();
+                neneneko.Stop ();
+            }
         }
 
-        if (Neneneko.IsTesting) {
-            GUILayout.Label ("残り時間:" + neneneko.RemainingTestTime);
-        }
-
-        if( GUILayout.Button( "PlayEditor" ) )
-        {
-            StartTest ();
-        }
-
-        if( GUILayout.Button( "Play" ) )
-        {
-            neneneko.Play ();
-        }
-        if( GUILayout.Button( "Stop" ) )
-        {
-            neneneko.Stop ();
-        }
 
     }
 

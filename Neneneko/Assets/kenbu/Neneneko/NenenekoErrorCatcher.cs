@@ -17,11 +17,6 @@ namespace kenbu.Neneneko{
             Application.logMessageReceived += HandleException;
         }
 
-        void OnDisable()
-        {
-            
-        }
-
         void HandleException(string logString, string stackTrace, LogType type)
         {
             if (type == LogType.Exception) {

@@ -9,11 +9,10 @@ using System.Timers;
 using UnityEditor;
 #endif
 namespace kenbu.Neneneko{
-    [ExecuteInEditMode]
     public class Neneneko : MonoBehaviour {
 
         //CIが実行したか
-        public static bool isExcutedCI = false;
+        public static bool isExcutedCI = true;
 
         //アウトプットパス
         public static string outputPath = "/kenbu/Neneneko/Captured/";
@@ -36,6 +35,8 @@ namespace kenbu.Neneneko{
         //テストタイム 5分
         public static float testTimeSconds = 5.0f * 60.0f;
 
+        public static bool isTesting = false;
+
         //成功か
         public bool success = true;
 
@@ -43,13 +44,6 @@ namespace kenbu.Neneneko{
         private NenenekoRecorder _recorder;
         private NenenekoTapExecutor _tapExecutor;   //todo: 一旦タップのみそのうちユーザーインタラクションをいろいろ設定可能に。
 
-
-        private static bool _isTesting;
-        public static bool IsTesting {
-            get{
-                return _isTesting;
-            }
-        } 
 
         private float _startTime;
         public float RemainingTestTime{
@@ -60,26 +54,22 @@ namespace kenbu.Neneneko{
 
         // Use this for initialization
         void Start () {
-            //todo: EditorじゃなかったらDestroy
-
-
+            
             _recorder = GetComponent<NenenekoRecorder> ();
             _errorCatcher = GetComponent<NenenekoErrorCatcher> ();
             _tapExecutor = GetComponent<NenenekoTapExecutor> ();
 
-            //
-            if(isExcutedCI) {
-                Play();
-            }
+
+            Play();
         }
 
         public void Play(){
 
-            if (_isTesting) {
+            if (isTesting) {
                 return;
             } 
 
-            _isTesting = true;
+            isTesting = true;
 
             StartCoroutine (_Play());
 
@@ -110,7 +100,7 @@ namespace kenbu.Neneneko{
                 //問題なしで終わった。
                 Debug.Log("問題なしかも");
                 Exit (0);
-                _isTesting = false;
+                isTesting = false;
             } else {
                 //Exceptionあり
                 _recorder.CompleateRecording(()=>{
@@ -119,7 +109,7 @@ namespace kenbu.Neneneko{
                         Exit (1);
                     }
                     #endif
-                    _isTesting = false;
+                    isTesting = false;
                 });
             }
         }
@@ -130,6 +120,7 @@ namespace kenbu.Neneneko{
             }
 
         }
+
 
     }
 }

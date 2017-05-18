@@ -36,7 +36,7 @@ Assets/_AssetBundle.meta
 
 # MonoDevelop
 *.usertasks
-*/Assets/kenbu/Neneneko/Captured/*
+*/Assets/kenbu/Neneneko/Captured/*.png*
 
 # Visual Studio Code
 

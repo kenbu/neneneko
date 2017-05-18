@@ -22,5 +22,3 @@ then
 else
 	echo "問題なし"
 fi
-
-return 0

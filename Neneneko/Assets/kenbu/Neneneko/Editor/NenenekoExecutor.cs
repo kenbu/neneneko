@@ -21,8 +21,23 @@ public class NenenekoCI : Editor
 
         EditorApplication.isPlaying = true;
 
-        var resource = Resources.Load ("Neneneko")as GameObject;
+        var nennekoResource = Resources.Load ("Neneneko")as GameObject;
 
-        Instantiate (resource);
+        var nenenekoGo = Instantiate (nennekoResource)as GameObject;
+
+        var neneneko = nenenekoGo.GetComponent <Neneneko>();
+
+
+        var args = System.Environment.GetCommandLineArgs();
+        foreach (var str in args) {
+            Debug.Log (str);
+            //neneneko.isExcutedCI2 = true;
+            //これはやっぱり無効ですね。
+
+            //System.Environment.GetCommandLineArgs これで受け取る形は難しいなぁ。配列だからぁ。。他の環境になったらぶつかっちゃうわ。
+
+
+
+        }
     }
 }

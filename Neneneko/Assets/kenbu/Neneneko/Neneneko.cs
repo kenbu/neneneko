@@ -13,6 +13,7 @@ namespace kenbu.Neneneko{
 
         //CIが実行したか
         public static bool isExcutedCI = true;
+        public bool isExcutedCI2 = false;
 
         //アウトプットパス
         public static string outputPath = "/kenbu/Neneneko/Captured/";
@@ -60,6 +61,8 @@ namespace kenbu.Neneneko{
             _errorCatcher = GetComponent<NenenekoErrorCatcher> ();
             _tapExecutor = GetComponent<NenenekoTapExecutor> ();
             _timer = GetComponent<NenenekoTimer> ();
+
+            Debug.Log ("いかがか" + isExcutedCI2);
 
             Play();
         }
